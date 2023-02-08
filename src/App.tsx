@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css"
+import { useAppSelector } from "./app/types"
+import Book from "./features/Book/Book"
+import Navbar from "./features/Navbar/Navbar"
+import StudentList from "./features/StudentList/StudentList"
+import SubjectList from "./features/SubjectList/SubjectList"
 
 function App() {
+  const activePage = useAppSelector((state) => state.navbar.activePage)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      {activePage === "Subjects" ? (
+        <SubjectList />
+      ) : activePage === "Students" ? (
+        <StudentList />
+      ) : (
+        <Book />
+      )}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
